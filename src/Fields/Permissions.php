@@ -2,7 +2,6 @@
 
 namespace Uteq\Move\Fields;
 
-use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Permission;
 
 class Permissions extends Field
@@ -16,7 +15,5 @@ class Permissions extends Field
         $permissions = $permissionClass::all()->map(function ($permission, $key) {
             dd(__(ucfirst($permission->group)));
         });
-
-
     }
 }
