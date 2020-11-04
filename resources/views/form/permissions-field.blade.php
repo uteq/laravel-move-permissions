@@ -9,7 +9,7 @@
                             model="{{ $field->store }}.{{ $option->id }}"
                             :value="$option->name"
                         ></x-move-field.checkbox>
-                        <span class="pl-2">{{ $option['name'] }}</span>
+                        <span class="pl-2">{{ $option->name }}</span>
                     </label>
                 @endforeach
             </div>

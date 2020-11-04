@@ -1,5 +1,4 @@
 <div class="flex text-wrap" style="max-width: 600px;">
-{{--    @dump()--}}
 
 @foreach ($field->getOptions()->flatten() as $option)
     @if ($field->resource->permissions->contains('name', $option->name))
