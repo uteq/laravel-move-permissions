@@ -13,7 +13,7 @@ class Role extends Resource
     public static string $model = \Uteq\MovePermissions\Models\Role::class;
 
     public static array $search = [
-        'name'
+        'name',
     ];
 
     public static ?int $defaultPerPage = 25;
