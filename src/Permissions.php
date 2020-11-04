@@ -1,6 +1,6 @@
 <?php
 
-namespace Uteq\Permissions;
+namespace Uteq\MovePermissions;
 
 class Permissions
 {

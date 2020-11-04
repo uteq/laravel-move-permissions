@@ -1,6 +1,8 @@
 <?php
 
-namespace Uteq\Move\Fields;
+namespace Uteq\MovePermissions\Fields;
+
+use Uteq\Move\Fields\Select;
 
 class Role extends Select
 {

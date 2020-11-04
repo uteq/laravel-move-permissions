@@ -1,6 +1,6 @@
 <?php
 
-namespace Uteq\Permissions\Tests;
+namespace Uteq\MovePermissions\Tests;
 
 class ExampleTest extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Uteq\Permissions;
+namespace Uteq\MovePermissions;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Uteq\Permissions\Permissions
+ * @see \Uteq\MovePermissions\Permissions
  */
 class PermissionsFacade extends Facade
 {

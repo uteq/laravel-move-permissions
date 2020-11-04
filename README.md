@@ -26,13 +26,20 @@ composer require uteq/laravel-move-permissions
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Uteq\Permissions\PermissionsServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Uteq\MovePermissions\PermissionsServiceProvider" --tag="migrations"
 php artisan migrate
+```
+
+
+You can publish the seeders with:
+
+```bash
+php artisan vendor:publish --provider="Uteq\MovePermissions\PermissionsServiceProvider" --tag="seeders"
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Uteq\Permissions\PermissionsServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Uteq\MovePermissions\PermissionsServiceProvider" --tag="config"
 ```
 
 This is the contents of the published config file:
@@ -45,7 +52,7 @@ return [
 ## Usage
 
 ``` php
-$laravel-move-permissions = new Uteq\Permissions();
+$laravel-move-permissions = new Uteq\MovePermissions();
 echo $laravel-move-permissions->echoPhrase('Hello, Uteq!');
 ```
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Uteq\Permissions\Commands;
+namespace Uteq\MovePermissions\Commands;
 
 use Illuminate\Console\Command;
 

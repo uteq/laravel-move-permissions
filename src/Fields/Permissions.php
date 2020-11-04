@@ -1,22 +1,36 @@
 <?php
 
-namespace Uteq\Move\Fields;
+namespace Uteq\MovePermissions\Fields;
 
-use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Permission;
+use Uteq\Move\Fields\Field;
 
 class Permissions extends Field
 {
     public string $component = 'permissions-field';
 
-    public function getOptions(): array
+    public function __construct(string $name, string $attribute = null, callable $callableValue = null)
+    {
+        parent::__construct($name, $attribute, $callableValue);
+
+        $this->beforeStore(function ($model, $data, $value) {
+            $permissions = collect($data['permissions'] ?? [])
+                ->map(fn ($value) => $value['name'] ?? $value);
+
+            $model->syncPermissions($permissions);
+
+            unset($data['permissions']);
+
+            return $data;
+        });
+    }
+
+    public function getOptions()
     {
         /** @var Permission $permissionClass */
         $permissionClass = app(Permission::class)->getPermissionClass();
-        $permissions = $permissionClass::all()->map(function ($permission, $key) {
-            dd(__(ucfirst($permission->group)));
-        });
+        $permissions = $permissionClass::all()->groupBy('group');
 
-
+        return $permissions;
     }
 }

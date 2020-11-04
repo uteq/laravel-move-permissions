@@ -1,6 +1,6 @@
 <?php
 
-namespace Uteq\Permissions\Database\Factories;
+namespace Uteq\MovePermissions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

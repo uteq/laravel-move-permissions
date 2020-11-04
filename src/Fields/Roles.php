@@ -1,6 +1,6 @@
 <?php
 
-namespace Uteq\Move\Fields;
+namespace Uteq\MovePermissions\Fields;
 
 class Roles extends Role
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Uteq\Permissions\Tests;
+namespace Uteq\MovePermissions\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Uteq\Permissions\PermissionsServiceProvider;
+use Uteq\MovePermissions\PermissionsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Uteq\\Permissions\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Uteq\\MovePermissions\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

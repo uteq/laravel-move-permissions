@@ -1,9 +1,9 @@
 <?php
 
-namespace Uteq\Permissions;
+namespace Uteq\MovePermissions;
 
 use Illuminate\Support\ServiceProvider;
-use Uteq\Permissions\Commands\PermissionsCommand;
+use Uteq\MovePermissions\Commands\PermissionsCommand;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -19,8 +19,8 @@ class PermissionsServiceProvider extends ServiceProvider
             ], 'views');
 
             $this->publishes([
-                __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => database_path('seeds/RolesAndPermissionsSeeder'),
-            ], 'seeds');
+                __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => database_path('seeders/RolesAndPermissionsSeeder'),
+            ], 'seeders');
 
             $migrationFileName = 'create_move_permissions_table.php';
             if (! $this->migrationFileExists($migrationFileName)) {
@@ -34,7 +34,7 @@ class PermissionsServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move-permissions');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move');
     }
 
     public function register()

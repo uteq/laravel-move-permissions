@@ -1,4 +1,4 @@
-<x-move-form.row custom label="{{ $field->name }}" model="{{ $field->model() }}" :required="$field->isRequired()" help-text="{{ $field->getHelpText() }}">
+<x-move-form.row custom label="{{ $field->name }}" model="{{ $field->store }}" :required="$field->isRequired()" help-text="{{ $field->getHelpText() }}">
 
     <x-move-field.select model="{{ $field->store }}"
                          placeholder="{{ $field->placeholder ?? null }}"
