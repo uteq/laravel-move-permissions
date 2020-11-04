@@ -1,24 +1,28 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace Uteq\Permissions;
 
 use Illuminate\Support\ServiceProvider;
-use Spatie\Skeleton\Commands\SkeletonCommand;
+use Uteq\Permissions\Commands\PermissionsCommand;
 
-class SkeletonServiceProvider extends ServiceProvider
+class PermissionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/skeleton.php' => config_path('skeleton.php'),
+                __DIR__ . '/../config/move-permissions.php' => config_path('move-permissions.php'),
             ], 'config');
 
             $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/skeleton'),
+                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/move-permissions'),
             ], 'views');
 
-            $migrationFileName = 'create_skeleton_table.php';
+            $this->publishes([
+                __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => database_path('seeds/RolesAndPermissionsSeeder'),
+            ], 'seeds');
+
+            $migrationFileName = 'create_move_permissions_table.php';
             if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes([
                     __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
@@ -26,16 +30,16 @@ class SkeletonServiceProvider extends ServiceProvider
             }
 
             $this->commands([
-                SkeletonCommand::class,
+                PermissionsCommand::class,
             ]);
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'skeleton');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move-permissions');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'skeleton');
+        $this->mergeConfigFrom(__DIR__ . '/../config/move-permissions.php', 'move-permissions');
     }
 
     public static function migrationFileExists(string $migrationFileName): bool

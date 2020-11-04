@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace Uteq\Permissions\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PermissionsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'move-permissions';
 
     public $description = 'My command';
 

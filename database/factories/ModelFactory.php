@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Database\Factories;
+namespace Uteq\Permissions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

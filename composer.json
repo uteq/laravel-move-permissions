@@ -1,23 +1,24 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "uteq/laravel-move-permissions",
+    "description": "Permissions for Laravel Move Admin Panel",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "uteq",
+        "laravel-move-permissions"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/uteq/laravel-move-permissions",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Nathan Jansen",
+            "email": "info@nathanjansen.nl",
             "homepage": "https://spatie.be",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^7.4",
-        "illuminate/contracts": "^8.0"
+        "illuminate/contracts": "^8.0",
+        "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -27,13 +28,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Uteq\\Permissions\\": "src",
+            "Uteq\\Permissions\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Uteq\\Permissions\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -48,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "Uteq\\Permissions\\PermissionsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "Permissions": "Uteq\\Permissions\\PermissionsFacade"
             }
         }
     },
