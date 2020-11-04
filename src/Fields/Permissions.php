@@ -19,6 +19,8 @@ class Permissions extends Field
 
             $model->syncPermissions($permissions);
 
+            unset($data['permissions']);
+
             return $data;
         });
     }
