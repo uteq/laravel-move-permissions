@@ -4,16 +4,12 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/uteq/laravel-move-permissions/run-tests?label=tests)](https://github.com/uteq/laravel-move-permissions/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/uteq/laravel-move-permissions.svg?style=flat-square)](https://packagist.org/packages/uteq/laravel-move-permissions)
 
+<b>This package is still in development and does not have a test suite.</b>
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Permissions for Laravel Move enables you to create grouped permissions and is a wrapper for [Spaties Laravel Permission](https://spatie.be/docs/laravel-permission/). This package was heavily inspired by this package https://github.com/eminiarts/nova-permissions, by [eminiarts](https://github.com/eminiarts).
 
 ## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-laravel-move-permissions-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-laravel-move-permissions-laravel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+The best way to support us is by adding a test suite to this project and help build, give feedback and extend it :)
 
 ## Installation
 
@@ -42,18 +38,40 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Uteq\MovePermissions\PermissionsServiceProvider" --tag="config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
+Add one of the following (or all) to your User Resource:
 ``` php
-$laravel-move-permissions = new Uteq\MovePermissions();
-echo $laravel-move-permissions->echoPhrase('Hello, Uteq!');
+use Uteq\MovePermissions\Fields\Role;
+use Uteq\MovePermissions\Fields\Roles;
+use Uteq\MovePermissions\Fields\Permissions;
+
+public function fields()
+{
+    // Add a single role to your user
+    Role::make('Rol', 'role'),
+
+    // Add more than one role to your user
+    Roles::make('Roles', 'roles'),
+
+    // Add permissions to your user
+    Permissions::make('Permissions', 'permissions'),
+}
+```
+You are free to combine the Role/Roles and Permissions.
+Don't use the Role and Roles Field on the same Resource.
+
+### Add the Role Resource to your Move folder
+
+```php
+<?php
+
+namespace App\Admin\Users;
+
+class Role extends \Uteq\MovePermissions\Resources\Role
+{
+
+}
 ```
 
 ## Testing

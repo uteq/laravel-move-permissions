@@ -44,4 +44,9 @@ class Role extends Resource
         return [
         ];
     }
+
+    public function icon()
+    {
+        return 'heroicon-o-lock-closed';
+    }
 }

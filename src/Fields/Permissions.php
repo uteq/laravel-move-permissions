@@ -4,6 +4,7 @@ namespace Uteq\MovePermissions\Fields;
 
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Models\Permission;
+use Uteq\Move\Actions\UnsetField;
 use Uteq\Move\Fields\Field;
 
 class Permissions extends Field
@@ -20,15 +21,14 @@ class Permissions extends Field
                 : $data;
         });
 
-        $this->beforeStore(function ($model, $data, $value) {
-            $permissions = collect($data['permissions'] ?? [])
+        $this->beforeStore(function ($value, $field, $model, $data) {
+            $permissions = collect($value ?? [])
                 ->map(fn ($value) => $value['name'] ?? $value);
-
             $model->syncPermissions($permissions);
 
-            unset($data['permissions']);
+            unset($model['permissions']);
 
-            return $data;
+            return UnsetField::class;
         });
     }
 

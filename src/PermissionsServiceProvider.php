@@ -2,44 +2,46 @@
 
 namespace Uteq\MovePermissions;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Uteq\Move\Facades\Move;
 use Uteq\MovePermissions\Commands\PermissionsCommand;
+use Uteq\MovePermissions\Policies\ResourcePolicy;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/move-permissions.php' => config_path('move-permissions.php'),
-            ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/move-permissions'),
-            ], 'views');
-
-            $this->publishes([
-                __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => database_path('seeders/RolesAndPermissionsSeeder'),
-            ], 'seeders');
-
-            $migrationFileName = 'create_move_permissions_table.php';
-            if (! $this->migrationFileExists($migrationFileName)) {
-                $this->publishes([
-                    __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
-                ], 'migrations');
-            }
-
-            $this->commands([
-                PermissionsCommand::class,
-            ]);
+            $this->bootPublishers();
+            $this->bootCommands();
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move');
+        $this->bootViews();
+        $this->bootPolicies();
     }
 
-    public function register()
+    private function bootPublishers(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/move-permissions.php', 'move-permissions');
+        $this->publishes([
+            __DIR__ . '/../config/permissions.php' => config_path('permissions.php'),
+        ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/move-permissions'),
+        ], 'views');
+
+        $this->publishes([
+            __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => database_path('seeders/RolesAndPermissionsSeeder.php'),
+        ], 'seeders');
+
+        $migrationFileName = 'create_move_permissions_table.php';
+        if (! $this->migrationFileExists($migrationFileName)) {
+            $this->publishes([
+                __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
+            ], 'migrations');
+        }
     }
 
     public static function migrationFileExists(string $migrationFileName): bool
@@ -52,5 +54,31 @@ class PermissionsServiceProvider extends ServiceProvider
         }
 
         return false;
+    }
+
+    public function bootCommands()
+    {
+        $this->commands([
+            PermissionsCommand::class,
+        ]);
+    }
+
+    public function bootViews()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move');
+    }
+
+    public function bootPolicies()
+    {
+        collect(Move::all())
+            ->filter(fn ($resource) => ! Gate::getPolicyFor($resource::$model))
+            ->each(function ($resource) {
+                Gate::policy($resource::$model, ResourcePolicy::class);
+            });
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/permissions.php', 'move-permissions');
     }
 }
