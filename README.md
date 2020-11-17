@@ -60,6 +60,7 @@ public function fields()
 ```
 You are free to combine the Role/Roles and Permissions.
 Don't use the Role and Roles Field on the same Resource.
+Make sure you add a Policy for the User to make Permissions policy work. 
 
 ### Add the Role Resource to your Move folder
 
