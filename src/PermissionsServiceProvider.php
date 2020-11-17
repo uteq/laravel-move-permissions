@@ -4,7 +4,6 @@ namespace Uteq\MovePermissions;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Uteq\Move\Facades\Move;
 use Uteq\MovePermissions\Commands\PermissionsCommand;
 use Uteq\MovePermissions\Policies\ResourcePolicy;
