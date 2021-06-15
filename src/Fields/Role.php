@@ -15,11 +15,6 @@ class Role extends Select
         $this->placeholder = (string) __('Select a role');
 
         $this->beforeStore(function ($value, $field, $model, $data) {
-            if (isset($model->role)) {
-                return $value;
-            }
-
-            unset($model->role);
 
             $model->syncRoles($value);
 
