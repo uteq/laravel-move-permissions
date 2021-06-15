@@ -21,7 +21,7 @@ class Role extends Select
             return $value;
         });
 
-        $this->callableValue = function ($value, $user, $field) {
+        $this->valueCallback = function ($value, $user, $field) {
             return optional($user->roles()->first())->name;
         };
     }
