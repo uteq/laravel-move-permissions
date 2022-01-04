@@ -35,7 +35,7 @@ class Permissions extends Field
     public function getOptions()
     {
         /** @var Permission $permissionClass */
-        $permissionClass = app(config('permissions.models.permission'));
+        $permissionClass = app(config('permission.models.permission'));
         $permissions = $permissionClass::all()->groupBy('group');
 
         return $permissions;
