@@ -53,7 +53,7 @@ class Permission extends Resource
     public function filters(): array
     {
         return [
-            new PermissionGroupFilter,
+            new PermissionGroupFilter(),
         ];
     }
 }
