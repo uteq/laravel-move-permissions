@@ -2,7 +2,6 @@
 
 namespace Uteq\MovePermissions\Fields;
 
-use Illuminate\Database\Eloquent\Model;
 use Uteq\Move\Fields\Select;
 
 class Role extends Select
@@ -18,7 +17,6 @@ class Role extends Select
         $this->placeholder = (string) __('Select a role');
 
         $this->beforeStore(function ($value, $field, $model, $data) {
-
             $model->syncRoles($value);
 
             return $value;
@@ -35,7 +33,7 @@ class Role extends Select
     {
         $this->options = $this->useModel::all()
             ->mapWithKeys(fn ($role) => [
-                $role->name => $role->name
+                $role->name => $role->name,
             ])
             ->toArray();
     }
