@@ -26,7 +26,6 @@ class Permissions extends Field
         );
 
         $this->beforeStore(function ($value, $_field, $model) {
-
             $permissions = collect($value ?? [])
                 ->map(fn ($value) => $value['name'] ?? $value);
 
