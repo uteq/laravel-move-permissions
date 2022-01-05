@@ -70,10 +70,5 @@
             "url": "https://spatie.be/open-source/support-us"
         }
     ],
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../laravel-move"
-        }
-    ]
+    "repositories": []
 }
