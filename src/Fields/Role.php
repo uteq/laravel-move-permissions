@@ -15,14 +15,12 @@ class Role extends Select
         string $name,
         string $attribute = null,
         Closure $valueCallback = null
-    )
-    {
+    ) {
         parent::__construct($name, $attribute, $valueCallback);
 
         $this->placeholder = (string) __('Select a role');
 
         $this->beforeStore(function ($value, $_field, $model) {
-
             $model->syncRoles($value);
 
             return $value;
@@ -39,7 +37,7 @@ class Role extends Select
     {
         $this->options = $this->useModel::all()
             ->mapWithKeys(fn ($role) => [
-                $role->name => $role->name
+                $role->name => $role->name,
             ])
             ->toArray();
     }
