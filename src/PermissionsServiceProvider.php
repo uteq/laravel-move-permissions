@@ -10,7 +10,7 @@ use Uteq\MovePermissions\Policies\ResourcePolicy;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->bootPublishers();
@@ -55,19 +55,19 @@ class PermissionsServiceProvider extends ServiceProvider
         return false;
     }
 
-    public function bootCommands()
+    public function bootCommands(): void
     {
         $this->commands([
             PermissionsCommand::class,
         ]);
     }
 
-    public function bootViews()
+    public function bootViews(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'move');
     }
 
-    public function bootPolicies()
+    public function bootPolicies(): void
     {
         collect(Move::all())
             ->filter(fn ($resource) => ! Gate::getPolicyFor($resource::$model))

@@ -15,15 +15,21 @@ class Permissions extends Field
 
     public function __construct(string $name, string $attribute = null, callable $callableValue = null)
     {
-        parent::__construct($name, $attribute, $callableValue ?? function ($data, $model, $c) {
-            return $data instanceof Collection
-                ? $data->mapWithKeys(fn ($item) => [$item->id => $item->name])
-                : $data;
-        });
+        parent::__construct(
+            $name,
+            $attribute,
+            $callableValue ?? function ($data) {
+                return $data instanceof Collection
+                    ? $data->mapWithKeys(fn ($item) => [$item->id => $item->name])
+                    : $data;
+            }
+        );
 
-        $this->beforeStore(function ($value, $field, $model, $data) {
+        $this->beforeStore(function ($value, $_field, $model) {
+
             $permissions = collect($value ?? [])
                 ->map(fn ($value) => $value['name'] ?? $value);
+
             $model->syncPermissions($permissions);
 
             unset($model['permissions']);
@@ -32,11 +38,14 @@ class Permissions extends Field
         });
     }
 
-    public function getOptions()
+    public function getOptions(): Collection
     {
         /** @var Permission $permissionClass */
         $permissionClass = app(config('permission.models.permission'));
-        $permissions = $permissionClass::all()->groupBy('group');
+
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
+        $permissions = $permissionClass::all()
+            ->groupBy('group');
 
         return $permissions;
     }

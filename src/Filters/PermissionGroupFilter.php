@@ -9,39 +9,33 @@ use Uteq\MovePermissions\Resources\Permission;
 class PermissionGroupFilter extends Filter
 {
     /**
-     * The filter's component.
-     *
-     * @var string
+     * The name used to locate the view
+     * and identify the component
      */
     public string $component = 'select-filter';
 
-    /** @var string */
+    /**
+     * The user-friendly name to describe the filter
+     */
     public string $name = 'Permissies groep';
 
     /**
-     * Apply the filter to the given query.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param mixed $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * Applies the filter to the given query.
      */
-    public function apply($query, $value): Builder
+    public function apply(Builder $query, $value, $request): Builder
     {
-        if (empty($value)) {
-            return $query;
-        }
-
-        return $query->where('group', $value);
+        return empty($value)
+            ? $query
+            : $query->where('group', $value);
     }
 
     /**
      * Get the filter's available options.
-     *
-     * @return array
      */
-    public function options()
+    public function options(): array
     {
-        return Permission::$model::all()
+        return Permission::$model::query()
+            ->get()
             ->unique('group')
             ->pluck('group')
             ->mapWithKeys(fn ($group) => [ucfirst($group) => $group])

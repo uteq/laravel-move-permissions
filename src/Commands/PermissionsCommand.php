@@ -10,7 +10,7 @@ class PermissionsCommand extends Command
 
     public $description = 'My command';
 
-    public function handle()
+    public function handle(): void
     {
         $this->comment('All done');
     }

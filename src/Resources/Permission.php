@@ -32,7 +32,7 @@ class Permission extends Resource
         parent::__construct($resource);
     }
 
-    public function fields()
+    public function fields(): array
     {
         return [
             Id::make(),
@@ -45,14 +45,12 @@ class Permission extends Resource
         ];
     }
 
-    public function actions()
+    public function actions(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
-    public function filters()
+    public function filters(): array
     {
         return [
             new PermissionGroupFilter,

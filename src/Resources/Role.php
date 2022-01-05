@@ -20,6 +20,11 @@ class Role extends Resource
 
     public static string $title = 'name';
 
+    /**
+     * @return (Id|Permissions|Text)[]
+     *
+     * @psalm-return array{0: Id, 1: Text, 2: Permissions}
+     */
     public function fields()
     {
         return [
@@ -32,6 +37,11 @@ class Role extends Resource
         ];
     }
 
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public function actions()
     {
         return [
@@ -39,12 +49,20 @@ class Role extends Resource
         ];
     }
 
+    /**
+     * @return array
+     *
+     * @psalm-return array<empty, empty>
+     */
     public function filters()
     {
         return [
         ];
     }
 
+    /**
+     * @return string
+     */
     public function icon()
     {
         return 'heroicon-o-lock-closed';

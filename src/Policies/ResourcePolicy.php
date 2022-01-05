@@ -9,6 +9,9 @@ class ResourcePolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * @return null|true
+     */
     public function before($user, $ability)
     {
         if ($user->hasRole('Super-Admin')) {
@@ -127,8 +130,10 @@ class ResourcePolicy
 
     /**
      * @param User $user
+     *
+     * @return bool
      */
-    public function viewAny(User $user, $model, $resource)
+    public function viewAny(User $user, $model, $resource): bool
     {
         return $user->can('view ' . $resource);
     }
